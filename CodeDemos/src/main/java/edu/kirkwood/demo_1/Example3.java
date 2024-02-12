@@ -1,4 +1,4 @@
-package edu.kirkwood.demo_week1;
+package edu.kirkwood.demo_1;
 
 import java.math.BigInteger;
 
