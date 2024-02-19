@@ -25,6 +25,12 @@ public class IfElse {
 
     } // end main method
 
+
+    /**
+     * Get a grade assigned to an assignment
+     * @param score an int between 0 and 100, representing the assignment score
+     * @return a String, A to F
+     */
     public static String getGrade(double score) {
         if(score >= 90) {
             return "A";
