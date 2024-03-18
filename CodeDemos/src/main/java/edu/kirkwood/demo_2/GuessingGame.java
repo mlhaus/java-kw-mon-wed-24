@@ -1,10 +1,14 @@
 package edu.kirkwood.demo_2;
 
+import edu.kirkwood.shared.Helpers;
+
 import java.util.Scanner;
 
 public class GuessingGame {
     public static void main(String[] args) {
-        String answer = "K"; // To do: randomize the letter
+        int letterA = 65;
+        int letterZ = 90;
+        String answer = (char)Helpers.randint(letterA, letterZ) + "";
         System.out.println("I'm thinking of a letter between A and Z.");
         System.out.print("Guess the letter: ");
         Scanner scanner = new Scanner(System.in);

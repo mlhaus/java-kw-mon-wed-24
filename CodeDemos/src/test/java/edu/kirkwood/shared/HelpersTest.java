@@ -6,6 +6,32 @@ import static edu.kirkwood.shared.Helpers.round;
 import static org.junit.jupiter.api.Assertions.*;
 
 class HelpersTest {
+    
+    @Test
+    void diceRoll() {
+        int min = 1;
+        int max = 6;
+        for(int i = 0; i < 100; i++) {
+            int rand = Helpers.randint(min, max);
+            if(rand < min || rand > max) {
+                System.out.println(rand + " is out of range");
+                fail("rand is out of range");
+            }
+        }
+    }
+    
+    @Test
+    void randNegPos() {
+        int min = -5;
+        int max = 5;
+        for(int i = 0; i < 100; i++) {
+            int rand = Helpers.randint(min, max);
+            if(rand < min || rand > max) {
+                System.out.println(rand + " is out of range");
+                fail("rand is out of range");
+            }
+        }
+    }
 
     @Test
     void roundBasic() {

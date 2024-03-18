@@ -1,5 +1,7 @@
 package edu.kirkwood.demo_1;
 
+import java.util.Scanner;
+
 public class ForDemo {
     public static void main(String[] args) {
 
@@ -42,6 +44,20 @@ public class ForDemo {
         for(i = 0; i < 10; i = i + 1) {
             System.out.println("This is x: " + i);
         }
+        System.out.println();
+
+        int x;
+        for (x = 10; x >=0; x -= 2) {
+            System.out.print(x + " ");
+        }
+        System.out.println();
+        
+        Scanner scanner = new Scanner(System.in);
+        // Loop until an S is typed.
+        System.out.println("Press S to stop.");
+        for (i = 0; !scanner.nextLine().equalsIgnoreCase("S"); i++)
+            System.out.println(" - Pass #" + i);
+        System.out.println();
 
         // This is an infinite loop
 //        for(int j = 0; j < 10; j--) {

@@ -15,4 +15,18 @@ public class Helpers {
         decimalFormat.setMaximumFractionDigits(numDecPlaces); // Step 3: Call the non-static method to set the number of decimal places
         return decimalFormat.format(number); // Step 4: Format the decimal number as a string and return it.
     }
+
+    /**
+     * To generate a random integer
+     * @param min The smallest int to return
+     * @param max The largest int to return
+     * @return A random integer between min and max
+     */
+    public static int randint(int min, int max) {
+        return (int)(Math.random() * (max - min + 1) + min);
+    }
+
+    
+
+
 }
