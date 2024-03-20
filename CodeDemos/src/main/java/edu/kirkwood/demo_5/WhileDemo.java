@@ -1,4 +1,4 @@
-package edu.kirkwood.demo_1;
+package edu.kirkwood.demo_5;
 
 import java.util.Scanner;
 
@@ -27,10 +27,10 @@ public class WhileDemo {
         // Step 1: Create an infinite loop
         i = 0;
         while(true) {
+            System.out.println(" - Pass #" + i++);
             if(scanner.nextLine().equalsIgnoreCase("S")) {
                 break;
             }
-            System.out.println(" - Pass #" + i++);
         }
         System.out.println();
     }
