@@ -4,4 +4,6 @@ public class Room {
     private String roomNumber;
     private double price;
     private RoomType roomType;
+    private boolean handicapAccessible;
+    private boolean hasKitchen;
 }
