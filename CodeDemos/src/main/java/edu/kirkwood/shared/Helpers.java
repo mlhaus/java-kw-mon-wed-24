@@ -1,6 +1,7 @@
 package edu.kirkwood.shared;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 
 public class Helpers {
     /**
@@ -26,6 +27,13 @@ public class Helpers {
         return (int)(Math.random() * (max - min + 1) + min);
     }
 
+    public static String printDate(LocalDate date) {
+        return Validators.dateFormatOutput.format(date);
+    }
+    
+    public static boolean areDatesInOrder(LocalDate date1, LocalDate date2) {
+        return date1.compareTo(date2) <= 0;
+    }
     
 
 

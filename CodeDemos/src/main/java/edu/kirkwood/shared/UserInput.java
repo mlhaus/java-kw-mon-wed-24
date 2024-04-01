@@ -1,6 +1,7 @@
 package edu.kirkwood.shared;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -52,8 +53,12 @@ public class UserInput {
             if(!Pattern.matches(Validators.dateRegex, dateStr)) {
                 System.out.println("** Invalid date **");
             } else {
-                date = LocalDate.parse(dateStr, Validators.dateFormatter);
-                break;
+                try {
+                    date = LocalDate.parse(dateStr, Validators.dateFormatInput);
+                    break;
+                } catch(DateTimeParseException e) {
+                    System.out.println("** Invalid date **");
+                }
             }
         }
         return date;
@@ -66,6 +71,7 @@ public class UserInput {
         getInt("User id", scanner);
         getString("First name", scanner);
         System.out.println(getBoolean("Handicap accessible", scanner));
-        System.out.println(getDate("Check in date", scanner));
+        LocalDate checkInDate = getDate("Check in date", scanner);
+        System.out.println(Helpers.printDate(checkInDate));
     }
 }
