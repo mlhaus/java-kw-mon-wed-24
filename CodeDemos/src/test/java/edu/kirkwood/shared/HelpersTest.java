@@ -2,10 +2,19 @@ package edu.kirkwood.shared;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static edu.kirkwood.shared.Helpers.round;
 import static org.junit.jupiter.api.Assertions.*;
 
 class HelpersTest {
+    
+    @Test
+    void isTodayOrFuture() {
+        assertTrue(Helpers.isTodayOrFuture(LocalDate.now()));
+        assertTrue(Helpers.isTodayOrFuture(LocalDate.now().plusDays(1)));
+        assertFalse(Helpers.isTodayOrFuture(LocalDate.now().minusDays(1)));
+    }
     
     @Test
     void diceRoll() {

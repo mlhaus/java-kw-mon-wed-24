@@ -5,26 +5,65 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class UserInput {
+import static edu.kirkwood.shared.UIUtility.displayWarning;
 
+public class UserInput {
+    
     public static int getInt(String prompt, Scanner scanner) {
+        return getInt(prompt, scanner, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+    
+    public static int getInt(String prompt, Scanner scanner, int min) {
+        return getInt(prompt, scanner, min, Integer.MAX_VALUE);
+    }
+
+    public static int getInt(String prompt, Scanner scanner, int min, int max) {
         int value = 0;
+
+        String minMax = "";
+        // if min is set and max is not set
+        if(min != Integer.MIN_VALUE && max == Integer.MAX_VALUE) {
+            minMax = String.format(" [minimum %d]", min);
+        }
+        // if min and max are both set
+        if(min != Integer.MIN_VALUE && max != Integer.MAX_VALUE) {
+            minMax = String.format(" [between %d and %d]", min, max);
+        }
+        
         while(true) {
-            System.out.print(prompt + ": ");
+            System.out.print(prompt + minMax + ": ");
             String valueStr = scanner.nextLine();
             try {
                 value = Integer.parseInt(valueStr);
-                break;
+                if(value < min) {
+                    displayWarning("Value entered is too low");
+                } else if(value > max) {
+                    displayWarning("Value entered is too high");
+                } else {
+                    break;
+                }
             } catch (NumberFormatException e) {
-                System.out.println("** Invalid integer **");
+                displayWarning("Invalid integer");
             }
         }
         return value;
     }
 
     public static String getString(String prompt, Scanner scanner) {
-        System.out.print(prompt + ": ");
-        String value = scanner.nextLine().trim();
+        return getString(prompt, scanner, false);
+    }
+
+    public static String getString(String prompt, Scanner scanner, boolean required) {
+        String value = "";
+        while(true) {
+            System.out.print(prompt + (required ? " (*)" : "") + ": ");
+            value = scanner.nextLine().trim();
+            if(required && !Helpers.isValidString(value)) {
+                displayWarning("Input required");
+            } else {
+                break;
+            }
+        }
         return value;
     }
 
@@ -37,7 +76,7 @@ public class UserInput {
                     valueStr.equalsIgnoreCase("yes") ||
                     valueStr.equalsIgnoreCase("no"))
             ) {
-                System.out.println("** Invalid input **");
+                displayWarning("Invalid input");
             } else {
                 value = valueStr.equalsIgnoreCase("y") || valueStr.equalsIgnoreCase("yes");
                 break;
@@ -50,14 +89,14 @@ public class UserInput {
         LocalDate date = null;
         while(true) {
             String dateStr = getString(prompt + " [MM/DD/YYYY]", scanner);
-            if(!Pattern.matches(Validators.dateRegex, dateStr)) {
-                System.out.println("** Invalid date **");
+            if(!Helpers.isValidDate(dateStr)) {
+                displayWarning("Invalid date");
             } else {
                 try {
                     date = LocalDate.parse(dateStr, Validators.dateFormatInput);
                     break;
                 } catch(DateTimeParseException e) {
-                    System.out.println("** Invalid date **");
+                    displayWarning("Invalid date");
                 }
             }
         }
@@ -68,8 +107,13 @@ public class UserInput {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        getInt("User id", scanner);
-        getString("First name", scanner);
+        int deposit = getInt("Deposit amount", scanner);
+        System.out.println(Helpers.toCurrency(deposit));
+        getInt("Temperature", scanner);
+        getInt("User id", scanner, 1);
+        getInt("Number people", scanner, 0, 4);
+        getString("First name", scanner, true);
+        getString("Favorite movie", scanner);
         System.out.println(getBoolean("Handicap accessible", scanner));
         LocalDate checkInDate = getDate("Check in date", scanner);
         System.out.println(Helpers.printDate(checkInDate));
