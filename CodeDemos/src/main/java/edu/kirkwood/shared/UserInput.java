@@ -29,7 +29,7 @@ public class UserInput {
         if(min != Integer.MIN_VALUE && max != Integer.MAX_VALUE) {
             minMax = String.format(" [between %d and %d]", min, max);
         }
-        
+
         while(true) {
             System.out.print(prompt + minMax + ": ");
             String valueStr = scanner.nextLine();

@@ -3,8 +3,12 @@ package edu.kirkwood.shared;
 import java.util.Scanner;
 
 public class UIUtility {
+
+    public static void displayMessage(String message) {
+        displayMessage(message, "");
+    }
     public static void displayMessage(String message, String type) {
-        System.out.printf("*** %s%s ***\n", type.toUpperCase() + " - ", message);
+        System.out.printf("*** %s%s ***\n", (!type.equals("") ? type.toUpperCase() + " - " : "") , message);
     }
 
     public static void displayError(String message) {
@@ -24,7 +28,7 @@ public class UIUtility {
     }
 
     public static void printLine() {
-        printLine(50);
+        printLine(40);
     }
 
     public static void printLine(int length) {
@@ -34,16 +38,9 @@ public class UIUtility {
         System.out.println();
     }
 
-    public static void printMenu(String[] menuItems) {
-//        String name = "Marc";
-//        name.length() // 4
-//        String[] myPets = {"Velcro", "Zipper", "Waffles"};
-//        myPets.length // 3
-        
-        // Python code
-        // for i in range(len(menu_items)):
-        //     print(str(i + 1) + ") " + menu_items[i])
+    public static void printMenu(String title, String[] menuItems) {
         printLine();
+        System.out.println(title);
         for(int i = 0; i < menuItems.length; i++) {
             System.out.println((i + 1) + ") " + menuItems[i]);
         }

@@ -17,7 +17,15 @@ public class ArrayDemo {
         // Array
         String[] menuItems = {"View customers", "View rooms", "View reservations", "Add new room"};
         System.out.println(Arrays.toString(menuItems));
-        printMenu(menuItems);
+        printMenu("Demo Menu", menuItems);
+        for(int i = 0; i < menuItems.length; i++) {
+            System.out.println(menuItems[i]);
+        }
+        System.out.println();
+        for(String item : menuItems) {
+            System.out.println(item);
+        }
+        System.out.println();
 
 
         // Python code
