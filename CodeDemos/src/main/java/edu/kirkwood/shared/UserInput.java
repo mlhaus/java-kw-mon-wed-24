@@ -8,6 +8,46 @@ import java.util.regex.Pattern;
 import static edu.kirkwood.shared.UIUtility.displayWarning;
 
 public class UserInput {
+
+    public static double getDouble(String prompt, Scanner scanner) {
+        return getDouble(prompt, scanner, -Double.MAX_VALUE, Double.MAX_VALUE);
+    }
+
+    public static double getDouble(String prompt, Scanner scanner, int min) {
+        return getDouble(prompt, scanner, min, Double.MAX_VALUE);
+    }
+
+    public static double getDouble(String prompt, Scanner scanner, double min, double max) {
+        double value = 0;
+
+        String minMax = "";
+        // if min is set and max is not set
+        if(min != -Double.MAX_VALUE && max == Double.MAX_VALUE) {
+            minMax = String.format(" [minimum %.1f]", min);
+        }
+        // if min and max are both set
+        if(min != -Double.MAX_VALUE && max != Double.MAX_VALUE) {
+            minMax = String.format(" [between %.1f and %.1f]", min, max);
+        }
+
+        while(true) {
+            System.out.print(prompt + minMax + ": ");
+            String valueStr = scanner.nextLine();
+            try {
+                value = Integer.parseInt(valueStr);
+                if(value < min) {
+                    displayWarning("Value entered is too low");
+                } else if(value > max) {
+                    displayWarning("Value entered is too high");
+                } else {
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                displayWarning("Invalid integer");
+            }
+        }
+        return value;
+    }
     
     public static int getInt(String prompt, Scanner scanner) {
         return getInt(prompt, scanner, Integer.MIN_VALUE, Integer.MAX_VALUE);
@@ -107,6 +147,9 @@ public class UserInput {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        getDouble("Temperature", scanner);
+        getDouble("User id", scanner, 1);
+        getDouble("Number people", scanner, 0, 4);
         int deposit = getInt("Deposit amount", scanner);
         System.out.println(Helpers.toCurrency(deposit));
         getInt("Temperature", scanner);

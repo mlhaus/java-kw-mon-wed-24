@@ -9,12 +9,12 @@ public class UserDAO extends Database {
     public static ArrayList<User> getAllUsers() {
         ArrayList<User> users = new ArrayList<>();
         // Get Connection
-        try(Connection connection = getConnection()) {
+        try (Connection connection = getConnection()) {
             // Get Statement
-            try(CallableStatement statement = connection.prepareCall("{CALL sp_get_all_users()}")) {
+            try (CallableStatement statement = connection.prepareCall("{CALL sp_get_all_users()}")) {
                 // Get ResultSet
                 ResultSet resultSet = statement.executeQuery();
-                while(resultSet.next()) {
+                while (resultSet.next()) {
                     int userId = resultSet.getInt("user_id");
                     String firstName = resultSet.getString("first_name");
                     String lastName = resultSet.getString("last_name");
@@ -23,7 +23,7 @@ public class UserDAO extends Database {
                     users.add(user);
                 }
             }
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return users;
@@ -33,5 +33,5 @@ public class UserDAO extends Database {
         User.printTableHeader();
         getAllUsers().forEach(System.out::println);
     }
-    
+
 }
