@@ -1,6 +1,8 @@
 package edu.kirkwood.project_demo.view;
 
+import edu.kirkwood.project_demo.data.RoomDAO;
 import edu.kirkwood.project_demo.data.UserDAO;
+import edu.kirkwood.project_demo.model.Room;
 import edu.kirkwood.project_demo.model.User;
 import edu.kirkwood.shared.UIUtility;
 import edu.kirkwood.shared.UserInput;
@@ -28,6 +30,11 @@ public class AdminMenu implements Menu {
                     break;
                 case 3:
                     // view rooms
+                    UIUtility.displayMessage(menuItems[2]);
+                    Room.printTableHeader();
+                    for(Room room : RoomDAO.getAllRooms()) {
+                        System.out.println(room);
+                    }
                     break;
                 case 4:
                     // add room

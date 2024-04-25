@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RoomDAO extends Database {
-    public static ArrayList<Room> getAllRoom() {
+    public static ArrayList<Room> getAllRooms() {
         ArrayList<Room> rooms = new ArrayList<>();
         // Get Connection
         try (Connection connection = getConnection()) {
@@ -22,8 +22,8 @@ public class RoomDAO extends Database {
                 while (resultSet.next()) {
                     String roomNumber = resultSet.getString("room_number");
                     double price = resultSet.getDouble("price");
-                    String roomTypeStr = resultSet.getString("room_type");
-                    RoomType roomType = null;
+                    String description = resultSet.getString("room_type");
+                    RoomType roomType = RoomType.getRoomType(description);
                     boolean handicapAccessible = resultSet.getBoolean("handicap_accessible");
                     Room room = new Room(roomNumber, price, roomType, handicapAccessible);
                     rooms.add(room);
@@ -36,7 +36,6 @@ public class RoomDAO extends Database {
     }
 
     public static void main(String[] args) {
-        User.printTableHeader();
-        getAllUsers().forEach(System.out::println);
+        getAllRooms().forEach(System.out::println);
     }
 }
