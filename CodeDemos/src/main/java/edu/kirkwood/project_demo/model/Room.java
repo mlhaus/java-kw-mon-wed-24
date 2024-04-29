@@ -33,6 +33,20 @@ public class Room {
         return String.format("| %-11s | %8s | %-12s | %-20s |",
                 roomNumber, Helpers.toCurrency(price), roomType, handicapAccessible ? "Yes" : "No");
     }
-    
-    
+
+    public String getRoomNumber() {
+        return roomNumber;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public RoomType getRoomType() {
+        return roomType;
+    }
+
+    public boolean isHandicapAccessible() {
+        return handicapAccessible;
+    }
 }

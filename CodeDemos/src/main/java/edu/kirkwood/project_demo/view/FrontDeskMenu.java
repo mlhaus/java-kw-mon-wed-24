@@ -26,6 +26,7 @@ public class FrontDeskMenu implements Menu {
                     // exit
                     return;
             }
+            UIUtility.pressEnterToContinue(scanner);
         }
     }
 }

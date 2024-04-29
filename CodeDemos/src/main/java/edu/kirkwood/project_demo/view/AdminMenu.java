@@ -1,7 +1,9 @@
 package edu.kirkwood.project_demo.view;
 
+import edu.kirkwood.project_demo.data.ReservationDAO;
 import edu.kirkwood.project_demo.data.RoomDAO;
 import edu.kirkwood.project_demo.data.UserDAO;
+import edu.kirkwood.project_demo.model.Reservation;
 import edu.kirkwood.project_demo.model.Room;
 import edu.kirkwood.project_demo.model.User;
 import edu.kirkwood.shared.UIUtility;
@@ -27,6 +29,11 @@ public class AdminMenu implements Menu {
                     break;
                 case 2:
                     // view reservations
+                    UIUtility.displayMessage(menuItems[1]);
+                    Reservation.printTableHeader();
+                    for(Reservation reservation : ReservationDAO.getAllReservations()) {
+                        System.out.println(reservation);
+                    }
                     break;
                 case 3:
                     // view rooms

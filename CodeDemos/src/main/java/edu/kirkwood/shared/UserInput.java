@@ -36,14 +36,14 @@ public class UserInput {
             try {
                 value = Double.parseDouble(valueStr);
                 if(value < min) {
-                    displayWarning("Value entered is too low");
+                    displayWarning("Value too low");
                 } else if(value > max) {
-                    displayWarning("Value entered is too high");
+                    displayWarning("Value too high");
                 } else {
                     break;
                 }
             } catch (NumberFormatException e) {
-                displayWarning("Invalid integer");
+                displayWarning("Invalid number");
             }
         }
         return value;
@@ -76,9 +76,9 @@ public class UserInput {
             try {
                 value = Integer.parseInt(valueStr);
                 if(value < min) {
-                    displayWarning("Value entered is too low");
+                    displayWarning("Value too low");
                 } else if(value > max) {
-                    displayWarning("Value entered is too high");
+                    displayWarning("Value too high");
                 } else {
                     break;
                 }

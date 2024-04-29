@@ -29,9 +29,26 @@ public class UserDAO extends Database {
         return users;
     }
 
+    public static boolean addUser(User user) {
+        try(Connection connection = getConnection()) {
+            try(CallableStatement statement = connection.prepareCall("{CALL sp_add_user(?, ?, ?, ?)}")) {
+                statement.setInt(1, user.getUserId());
+                statement.setString(2, user.getFirstName());
+                statement.setString(3, user.getLastName());
+                statement.setString(4, user.getEmail());
+                int rowsAffected = statement.executeUpdate();
+                return rowsAffected == 1;
+            }
+        } catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
-        User.printTableHeader();
-        getAllUsers().forEach(System.out::println);
+        addUser(new User(3, "John", "Doe", "john@example.com"));
+//        User.printTableHeader();
+//        getAllUsers().forEach(System.out::println);
     }
 
 }
