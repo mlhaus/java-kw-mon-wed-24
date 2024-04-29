@@ -34,7 +34,7 @@ public class UserInput {
             System.out.print(prompt + minMax + ": ");
             String valueStr = scanner.nextLine();
             try {
-                value = Integer.parseInt(valueStr);
+                value = Double.parseDouble(valueStr);
                 if(value < min) {
                     displayWarning("Value entered is too low");
                 } else if(value > max) {
