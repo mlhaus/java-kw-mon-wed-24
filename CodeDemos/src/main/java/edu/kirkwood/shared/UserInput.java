@@ -75,15 +75,16 @@ public class UserInput {
             String valueStr = scanner.nextLine();
             try {
                 value = Integer.parseInt(valueStr);
-                if(value < min) {
-                    displayWarning("Value too low");
-                } else if(value > max) {
-                    displayWarning("Value too high");
-                } else {
-                    break;
-                }
             } catch (NumberFormatException e) {
                 displayWarning("Invalid integer");
+            }
+
+            if(value < min) {
+                displayWarning("Value too low");
+            } else if(value > max) {
+                displayWarning("Value too high");
+            } else {
+                break;
             }
         }
         return value;
